@@ -1,0 +1,6 @@
+name: BWeaponsAndTools
+version: '1.0-SNAPSHOT'
+main: com.devcaiqueoliveira.bweaponsandtools.BWeaponsAndToolsPlugin
+api-version: '1.21'
+commands:
+  weapon:

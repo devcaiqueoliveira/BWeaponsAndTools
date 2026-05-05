@@ -1,0 +1,5 @@
+weapons:
+  Berserker:
+    name: "<red>Berserker"
+    damage: 100.0
+    material: "DIAMOND_AXE"
