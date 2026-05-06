@@ -2,9 +2,12 @@ package com.devcaiqueoliveira.bweaponsandtools.command;
 
 import com.devcaiqueoliveira.bweaponsandtools.BWeaponsAndToolsPlugin;
 import com.devcaiqueoliveira.bweaponsandtools.WeaponFactory;
+import com.devcaiqueoliveira.bweaponsandtools.WeaponService;
 import com.devcaiqueoliveira.bweaponsandtools.model.Weapon;
+import com.devcaiqueoliveira.bweaponsandtools.registry.WeaponRegistry;
 import lombok.AllArgsConstructor;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,25 +22,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
-public class WeaponGiveCommand implements CommandExecutor, TabCompleter {
+public class WeaponCommand implements CommandExecutor, TabCompleter {
 
     private final BWeaponsAndToolsPlugin plugin;
+    private final WeaponService weaponService;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         if (!(sender instanceof Player player)) return false;
 
-        if (args[0].equalsIgnoreCase("give")) {
 
-            Weapon weapon = Weapon.builder()
-                    .name(Component.text("<yellow>ESPADA SUPER OP"))
-                    .lore(List.of(Component.text("<red>Nem cavalo guenta")))
-                    .damage(50)
-                    .build();
+        switch (args[0]) {
+            case "give" -> {
+                Weapon weapon = weaponService.getWeapon(args[2]);
 
-            ItemStack itemStack = WeaponFactory.createWeapon(weapon);
+                ItemStack itemStack = WeaponFactory.createWeapon(weapon);
 
-            player.getInventory().addItem(itemStack);
+                Player target = Bukkit.getPlayer(args[1]);
+                if (target == null) {
+                    player.sendMessage(Component.text("Este jogador está offline ou não existe."));
+                    return false;
+                }
+
+                target.getInventory().addItem(itemStack);
+
+                target.sendMessage(Component.text("Enviando " + weapon.getName() + " para o jogador " + player.getName()));
+            }
+            case "reload" -> {
+                weaponService.reloadConfig();
+            }
         }
 
         return false;

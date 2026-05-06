@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Material;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -12,6 +14,9 @@ import java.util.List;
 @Data
 public class Weapon {
     private Component name;
-    private List<Component> lore;
+    @Builder.Default
+    private List<Component> lore = new ArrayList<>();
     private double damage;
+    @Builder.Default
+    private Material material = Material.STONE_AXE;
 }
