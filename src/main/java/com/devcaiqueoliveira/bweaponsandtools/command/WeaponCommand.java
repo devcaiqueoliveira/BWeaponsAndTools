@@ -1,18 +1,17 @@
 package com.devcaiqueoliveira.bweaponsandtools.command;
 
 import com.devcaiqueoliveira.bweaponsandtools.BWeaponsAndToolsPlugin;
-import com.devcaiqueoliveira.bweaponsandtools.WeaponFactory;
-import com.devcaiqueoliveira.bweaponsandtools.WeaponService;
+import com.devcaiqueoliveira.bweaponsandtools.factory.WeaponFactory;
+import com.devcaiqueoliveira.bweaponsandtools.service.WeaponService;
 import com.devcaiqueoliveira.bweaponsandtools.model.Weapon;
-import com.devcaiqueoliveira.bweaponsandtools.registry.WeaponRegistry;
 import lombok.AllArgsConstructor;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -46,7 +45,9 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
 
                 target.getInventory().addItem(itemStack);
 
-                target.sendMessage(Component.text("Enviando " + weapon.getName() + " para o jogador " + player.getName()));
+                String weaponName = MiniMessage.miniMessage().serialize(weapon.getName());
+
+                target.sendMessage(MiniMessage.miniMessage().deserialize("Enviando " + weaponName + " <white>para o jogador " + player.getName()));
             }
             case "reload" -> {
                 weaponService.reloadConfig();
@@ -66,13 +67,9 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
             return null;
         }
         if (args.length == 3) {
-            ConfigurationSection weaponsSection = plugin.getConfig().getConfigurationSection("weapons");
-
-            if (weaponsSection != null) {
-                for (String weaponName : weaponsSection.getKeys(false)) {
-                    if (weaponName.toLowerCase().startsWith(args[2].toLowerCase())) {
-                        suggestions.add(weaponName);
-                    }
+            for (String weaponName : weaponService.getAvailableWeapons()) {
+                if (weaponName.toLowerCase().startsWith(args[2].toLowerCase())) {
+                    suggestions.add(weaponName);
                 }
             }
         }

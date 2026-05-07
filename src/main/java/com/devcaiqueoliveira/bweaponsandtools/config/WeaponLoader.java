@@ -43,11 +43,6 @@ public class WeaponLoader {
                     .material(material)
                     .build();
 
-            Bukkit.getLogger().info("Adicionou arma: " + name + " na sessão: " + value);
-            Bukkit.getLogger().info("Adicionou arma com material: " + material + " na sessão: " + value);
-            Bukkit.getLogger().info("Adicionou arma com dano: " + damage + " na sessão: " + value);
-
-
             registry.add(value.toUpperCase(), weapon);
         }
 

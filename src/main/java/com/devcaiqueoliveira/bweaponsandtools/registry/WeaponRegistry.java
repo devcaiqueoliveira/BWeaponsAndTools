@@ -2,8 +2,7 @@ package com.devcaiqueoliveira.bweaponsandtools.registry;
 
 import com.devcaiqueoliveira.bweaponsandtools.model.Weapon;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class WeaponRegistry {
 
@@ -15,6 +14,10 @@ public class WeaponRegistry {
 
     public Weapon getWeapon(String name) {
         return weapons.get(name);
+    }
+
+    public Set<String> getAllWeapons() {
+        return weapons.keySet();
     }
 
     public void clear() {

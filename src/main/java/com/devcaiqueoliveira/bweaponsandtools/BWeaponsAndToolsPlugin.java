@@ -4,6 +4,7 @@ import com.devcaiqueoliveira.bweaponsandtools.command.WeaponCommand;
 import com.devcaiqueoliveira.bweaponsandtools.config.Config;
 import com.devcaiqueoliveira.bweaponsandtools.config.WeaponLoader;
 import com.devcaiqueoliveira.bweaponsandtools.registry.WeaponRegistry;
+import com.devcaiqueoliveira.bweaponsandtools.service.WeaponService;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class BWeaponsAndToolsPlugin extends JavaPlugin {

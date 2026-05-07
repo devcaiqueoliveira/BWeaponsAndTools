@@ -1,4 +1,4 @@
-package com.devcaiqueoliveira.bweaponsandtools;
+package com.devcaiqueoliveira.bweaponsandtools.factory;
 
 import com.devcaiqueoliveira.bweaponsandtools.model.Weapon;
 import org.bukkit.NamespacedKey;

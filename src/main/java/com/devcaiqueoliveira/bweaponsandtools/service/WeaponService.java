@@ -1,10 +1,11 @@
-package com.devcaiqueoliveira.bweaponsandtools;
+package com.devcaiqueoliveira.bweaponsandtools.service;
 
-import com.devcaiqueoliveira.bweaponsandtools.config.Config;
 import com.devcaiqueoliveira.bweaponsandtools.config.WeaponLoader;
 import com.devcaiqueoliveira.bweaponsandtools.model.Weapon;
 import com.devcaiqueoliveira.bweaponsandtools.registry.WeaponRegistry;
 import lombok.AllArgsConstructor;
+
+import java.util.Set;
 
 @AllArgsConstructor
 public class WeaponService {
@@ -14,6 +15,10 @@ public class WeaponService {
 
     public Weapon getWeapon(String name) {
         return weaponRegistry.getWeapon(name.toUpperCase());
+    }
+
+    public Set<String> getAvailableWeapons() {
+        return weaponRegistry.getAllWeapons();
     }
 
     public void reloadConfig() {
