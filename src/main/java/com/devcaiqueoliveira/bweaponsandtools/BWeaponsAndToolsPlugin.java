@@ -3,8 +3,10 @@ package com.devcaiqueoliveira.bweaponsandtools;
 import com.devcaiqueoliveira.bweaponsandtools.command.WeaponCommand;
 import com.devcaiqueoliveira.bweaponsandtools.config.Config;
 import com.devcaiqueoliveira.bweaponsandtools.config.WeaponLoader;
+import com.devcaiqueoliveira.bweaponsandtools.listener.WeaponDamageListener;
 import com.devcaiqueoliveira.bweaponsandtools.registry.WeaponRegistry;
 import com.devcaiqueoliveira.bweaponsandtools.service.WeaponService;
+import com.devcaiqueoliveira.bweaponsandtools.validator.WeaponValidator;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class BWeaponsAndToolsPlugin extends JavaPlugin {
@@ -23,8 +25,12 @@ public final class BWeaponsAndToolsPlugin extends JavaPlugin {
 
         WeaponService weaponService = new WeaponService(weaponRegistry, loader);
 
-        getCommand("weapon").setExecutor(new WeaponCommand(this, weaponService));
+        WeaponValidator weaponValidator = new WeaponValidator(weaponRegistry);
 
+        WeaponDamageListener weaponDamageListener = new WeaponDamageListener(weaponValidator);
+
+        getCommand("weapon").setExecutor(new WeaponCommand(this, weaponService));
+        getServer().getPluginManager().registerEvents(weaponDamageListener, this);
     }
 
     @Override

@@ -13,6 +13,7 @@ import java.util.List;
 @Builder
 @Data
 public class Weapon {
+    private String id;
     private Component name;
     @Builder.Default
     private List<Component> lore = new ArrayList<>();

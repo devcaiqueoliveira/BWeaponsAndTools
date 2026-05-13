@@ -30,7 +30,6 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         if (!(sender instanceof Player player)) return false;
 
-
         switch (args[0]) {
             case "give" -> {
                 Weapon weapon = weaponService.getWeapon(args[2]);

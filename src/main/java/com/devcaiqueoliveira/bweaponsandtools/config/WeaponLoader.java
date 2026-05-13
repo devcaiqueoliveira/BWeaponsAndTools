@@ -22,7 +22,6 @@ public class WeaponLoader {
 
         ConfigurationSection weaponsSection = config.getConfigurationSection("weapons");
 
-
         if (weaponsSection == null) {
             Bukkit.getLogger().info("Sessão é nula");
             return;
@@ -38,6 +37,7 @@ public class WeaponLoader {
             Material material = Material.getMaterial(sectionMaterial);
 
             Weapon weapon = Weapon.builder()
+                    .id(value)
                     .name(MiniMessage.miniMessage().deserialize(name))
                     .damage(damage)
                     .material(material)

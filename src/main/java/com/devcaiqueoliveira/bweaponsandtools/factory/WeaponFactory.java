@@ -17,9 +17,13 @@ public class WeaponFactory {
         });
 
         itemStack.editPersistentDataContainer(pdc -> {
-            NamespacedKey namespacedKey = new NamespacedKey("bweaponsandtools", "weapon");
-            pdc.set(namespacedKey, PersistentDataType.BYTE, (byte) 1);
-            pdc.set(namespacedKey, PersistentDataType.DOUBLE, weapon.getDamage());
+            NamespacedKey isWeaponKey = new NamespacedKey("bweaponsandtools", "is_weapon");
+            NamespacedKey damageKey = new NamespacedKey("bweaponsandtools", "weapon_damage");
+            NamespacedKey idKey = new NamespacedKey("bweaponsandtools", "weapon_id");
+
+            pdc.set(isWeaponKey, PersistentDataType.BYTE, (byte) 1);
+            pdc.set(damageKey, PersistentDataType.DOUBLE, weapon.getDamage());
+            pdc.set(idKey, PersistentDataType.STRING, weapon.getId());
         });
 
         return itemStack;

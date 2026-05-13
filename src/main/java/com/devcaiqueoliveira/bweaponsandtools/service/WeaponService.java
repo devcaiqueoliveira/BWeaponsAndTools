@@ -7,11 +7,15 @@ import lombok.AllArgsConstructor;
 
 import java.util.Set;
 
-@AllArgsConstructor
 public class WeaponService {
 
     private final WeaponRegistry weaponRegistry;
     private final WeaponLoader loader;
+
+    public WeaponService(WeaponRegistry weaponRegistry, WeaponLoader loader) {
+        this.weaponRegistry = weaponRegistry;
+        this.loader = loader;
+    }
 
     public Weapon getWeapon(String name) {
         return weaponRegistry.getWeapon(name.toUpperCase());
